@@ -258,6 +258,44 @@ function main() {
     );
   }
 
+  // edgeGeom
+
+  {
+    const size = 8;
+    const widthSegments = 2;
+    const heightSegments = 2;
+    const depthSegments = 2;
+    const boxGeometry = new THREE.BoxGeometry(size, size, size, widthSegments, heightSegments, depthSegments);
+    const geometry = new THREE.EdgesGeometry(boxGeometry);
+    addLineGeometry(1, 0, geometry);
+  }
+
+  // wireframe
+
+  {
+    const size = 8;
+    const widthSegments = 2; // ui: widthSegments
+    const heightSegments = 2; // ui: heightSegments
+    const depthSegments = 2; // ui: depthSegments
+    const geometry = new THREE.WireframeGeometry(new THREE.BoxGeometry(size, size, size, widthSegments, heightSegments, depthSegments));
+    addLineGeometry(-1, 0, geometry);
+  }
+
+  // buffer geom
+  {
+    const radius = 3;
+    const widthSegments = 12;
+    const heightSegments = 8;
+    const geom = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
+    const pMaterial = new THREE.PointsMaterial({
+      color: 'red',
+      size: 1,
+    });
+    const points = new THREE.Points(geom, pMaterial);
+    addObject(-1, 0, points);
+    console.log(points);
+  }
+
   function render(time) {
     time *= 0.001; // time to seconds
 
